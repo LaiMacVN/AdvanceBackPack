@@ -1,0 +1,8 @@
+name: AdvanceBackPack
+version: '${project.version}'
+main: me.lightmax.advancebackpack.Main
+api-version: 1.13
+authors: [LightMaxVN]
+description: A simple but powerful backpack plugin
+commands:
+  backpack:
