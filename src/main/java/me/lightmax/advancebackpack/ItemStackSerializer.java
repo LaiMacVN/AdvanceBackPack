@@ -13,33 +13,6 @@ import java.util.Base64;
 
 public class ItemStackSerializer {
 
-    public static String itemStackArrayToBase64(ItemStack[] itemStacks) {
-        try{
-            ByteArrayOutputStream io = new ByteArrayOutputStream();
-            BukkitObjectOutputStream os = new BukkitObjectOutputStream(io);
-            os.writeObject(itemStacks);
-            os.flush();
-
-            byte[] serializedObject = io.toByteArray();
-            return Base64.getEncoder().encodeToString(serializedObject);
-        }catch (IOException e) {
-            //owo
-        }
-        return null;
-    }
-
-    public static ItemStack[] base64ToItemStackArray(String s) {
-        try{
-            ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(s.getBytes()));
-            BukkitObjectInputStream in = new BukkitObjectInputStream(is);
-
-            return (ItemStack[]) in.readObject();
-        }catch (IOException | ClassNotFoundException e) {
-            //owo
-        }
-        return null;
-    }
-
     public static ItemStack[] convertitemStackArrayFromBase64(String data) throws IOException {
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
@@ -63,10 +36,8 @@ public class ItemStackSerializer {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
 
-            // Write the size of the inventory
             dataOutput.writeInt(items.length);
 
-            // Save every element in the list
             for (int i = 0; i < items.length; i++) {
                 dataOutput.writeObject(items[i]);
             }

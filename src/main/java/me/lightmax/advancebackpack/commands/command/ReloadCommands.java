@@ -29,7 +29,7 @@ public class ReloadCommands extends SubCommands {
 
     @Override
     public String getPermission() {
-        return "advancebackpack.reload";
+        return "AdvanceBackPack.reload";
     }
 
     @Override

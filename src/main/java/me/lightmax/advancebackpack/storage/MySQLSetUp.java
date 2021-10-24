@@ -21,15 +21,15 @@ public class MySQLSetUp {
     }
 
     public void connect() throws ClassNotFoundException, SQLException {
-        if(!isConnected()) {
+        if (!isConnected()) {
             connection = DriverManager.getConnection("jdbc:mysql://" +
-                    plugin.host + ":" + plugin.port + "/" + plugin.database + "?useSSL=" + plugin.useSSL,
+                            plugin.host + ":" + plugin.port + "/" + plugin.database + "?useSSL=" + plugin.useSSL,
                     plugin.username, plugin.password);
         }
     }
 
     public void disconnect() throws SQLException {
-        if(isConnected()) {
+        if (isConnected()) {
             connection.close();
         }
     }

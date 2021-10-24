@@ -1,5 +1,6 @@
 package me.lightmax.advancebackpack.listener;
 
+import me.lightmax.advancebackpack.ItemStackSerializer;
 import me.lightmax.advancebackpack.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,17 +18,37 @@ public class CloseInventoryEvent implements Listener {
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
         Player p = (Player) e.getPlayer();
-        if(e.getView().getTitle().contains(e.getPlayer().getName())) {
-            String title = e.getView().getTitle().replace(" ", "");
-            char[] chars = title.toCharArray();
-            StringBuilder sb = new StringBuilder();
-            for(char c : chars){
-                if(Character.isDigit(c)){
-                    sb.append(c);
-                }
+        if (e.getView().getTitle().contains(e.getPlayer().getName())) {
+            String title = plugin.utils.decolor(e.getView().getTitle());
+            int num = plugin.utils.menuTitleSerializeToInt(title);
+            if (num == 0 || num > 9) {
+                return;
             }
-            int num = Integer.parseInt(sb.toString());
-            plugin.data.setInventoryContent(num, p.getUniqueId(), e.getInventory().getContents());
+            if (plugin.isEnableMySQl) {
+                if (!plugin.data.isPlayerExist(num, p.getUniqueId())) {
+                    plugin.data.createPlayer(num, p);
+                }
+                plugin.data.setInventoryContent(num, p.getUniqueId(), e.getInventory().getContents());
+                return;
+            }
+
+            if (plugin.isEnableYAMLStorage) {
+                if (plugin.yamlStorage.isExistPlayer(p.getUniqueId(), "/data")) {
+                    plugin.yamlStorage.createStorage(p.getUniqueId().toString(), "/data");
+                }
+                if (!plugin.yamlStorage.getConfig(p.getUniqueId().toString(), "/data").isConfigurationSection(String.valueOf(num))) {
+                    plugin.yamlStorage.getConfig(p.getUniqueId().toString(),
+                                    "/data")
+                            .createSection(
+                                    num +
+                                            "." + p.getName() +
+                                            "." + p.getUniqueId()
+                            );
+                }
+                plugin.yamlStorage.getConfig(p.getUniqueId().toString(), "/data").set(num + "." + p.getName() + "." + p.getUniqueId(), ItemStackSerializer.convertitemStackArrayToBase64(e.getInventory().getContents()));
+
+            }
+
         }
     }
 }

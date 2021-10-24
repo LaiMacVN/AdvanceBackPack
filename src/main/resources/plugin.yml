@@ -3,6 +3,8 @@ version: '${project.version}'
 main: me.lightmax.advancebackpack.Main
 api-version: 1.13
 authors: [LightMaxVN]
+depend: [Vault]
 description: A simple but powerful backpack plugin
 commands:
   backpack:
+    aliases: [bc]
