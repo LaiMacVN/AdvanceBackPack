@@ -10,6 +10,7 @@ public class MySQLSetUp {
 
     Main plugin;
 
+
     public MySQLSetUp(Main plugin) {
         this.plugin = plugin;
     }

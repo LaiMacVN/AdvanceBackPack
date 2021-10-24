@@ -40,19 +40,21 @@ public class HelpCommands extends SubCommands {
     @Override
     public void perform(Player player, String[] args) {
         if (args.length == 1) {
-            player.sendMessage(plugin.utils.color("&e&l&m----------------------------------"));
+            player.sendMessage(plugin.utils.color("&e&l&m---------------------------------------"));
             for (int i = 0; i < commandManager.getCommands().size(); i++) {
                 if (player.hasPermission(commandManager.getCommands().get(i).getPermission()) || Objects.equals(commandManager.getCommands().get(i).getPermission(), "default")) {
                     player.sendMessage(plugin.utils.color("&b" + commandManager.getCommands().get(i).getSyntax() + "&7: " + commandManager.getCommands().get(i).getDesc()));
                 }
             }
-            player.sendMessage(plugin.utils.color("&e&l&m----------------------------------"));
+            player.sendMessage(plugin.utils.color("&e&l&m---------------------------------------"));
         }
         if (args.length > 1) {
             for (int i = 0; i < commandManager.getCommands().size(); i++) {
                 if (args[1].equalsIgnoreCase(commandManager.getCommands().get(i).getName())) {
                     if (player.hasPermission(commandManager.getCommands().get(i).getPermission()) || Objects.equals(commandManager.getCommands().get(i).getPermission(), "default")) {
-                        player.sendMessage(plugin.utils.color("&a" + commandManager.getCommands().get(i).getDesc()));
+                        player.sendMessage(plugin.utils.color("&e&l&m---------------------------------------"));
+                        player.sendMessage(plugin.utils.color("&bMô tả:&a " + commandManager.getCommands().get(i).getDesc()));
+                        player.sendMessage(plugin.utils.color("&e&l&m---------------------------------------"));
                     } else {
                         player.sendMessage(plugin.utils.color("&cBạn không có quyền để xem trợ giúp lệnh này!"));
                     }

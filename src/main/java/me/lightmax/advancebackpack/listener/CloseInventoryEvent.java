@@ -1,6 +1,5 @@
 package me.lightmax.advancebackpack.listener;
 
-import me.lightmax.advancebackpack.ItemStackSerializer;
 import me.lightmax.advancebackpack.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,14 +24,14 @@ public class CloseInventoryEvent implements Listener {
                 return;
             }
             if (plugin.isEnableMySQl) {
-                if (!plugin.data.isPlayerExist(num, p.getUniqueId())) {
+                if (plugin.data.isPlayerExist(num, p.getUniqueId())) {
                     plugin.data.createPlayer(num, p);
                 }
                 plugin.data.setInventoryContent(num, p.getUniqueId(), e.getInventory().getContents());
                 return;
             }
 
-            if (plugin.isEnableYAMLStorage) {
+/*            if (plugin.isEnableYAMLStorage) {
                 if (plugin.yamlStorage.isExistPlayer(p.getUniqueId(), "/data")) {
                     plugin.yamlStorage.createStorage(p.getUniqueId().toString(), "/data");
                 }
@@ -47,7 +46,7 @@ public class CloseInventoryEvent implements Listener {
                 }
                 plugin.yamlStorage.getConfig(p.getUniqueId().toString(), "/data").set(num + "." + p.getName() + "." + p.getUniqueId(), ItemStackSerializer.convertitemStackArrayToBase64(e.getInventory().getContents()));
 
-            }
+            }*/
 
         }
     }

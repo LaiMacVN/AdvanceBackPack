@@ -49,7 +49,7 @@ public class MainGUI extends MenuManager {
                         return;
                     }
                     Inventory inv = Bukkit.createInventory(null, 54, "Kho đồ " + name + " của " + player.getName());
-                    if (!plugin.data.isPlayerExist(name, player.getUniqueId())) {
+                    if (plugin.data.isPlayerExist(name, player.getUniqueId())) {
                         plugin.data.createPlayer(name, player);
                         player.openInventory(inv);
                         return;
@@ -65,7 +65,7 @@ public class MainGUI extends MenuManager {
             return;
         }
 
-        if (plugin.isEnableYAMLStorage) {
+/*        if (plugin.isEnableYAMLStorage) {
             switch (event.getCurrentItem().getType()) {
                 case RED_STAINED_GLASS_PANE:
                     player.sendMessage(plugin.utils.color("&cBạn chưa mở khóa ô này! &o&7(/backpack unlock để mở khóa!)"));
@@ -96,7 +96,7 @@ public class MainGUI extends MenuManager {
                     player.openInventory(inv);
                     break;
             }
-        }
+        }*/
 
     }
 

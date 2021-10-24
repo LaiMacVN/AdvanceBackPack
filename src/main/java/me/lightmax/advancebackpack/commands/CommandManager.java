@@ -24,7 +24,6 @@ public class CommandManager implements TabExecutor {
         commands.add(new OpenGuiCommand(plugin));
         commands.add(new HelpCommands(plugin, this));
         commands.add(new DeleteBackPackCommand(plugin));
-        commands.add(new DebugCommands(plugin));
         commands.add(new OpenUpgradeGUI(plugin));
     }
 

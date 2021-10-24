@@ -62,7 +62,7 @@ public class DeleteBackPackCommand extends SubCommands {
                 return;
             }
 
-            if (!plugin.data.isPlayerExist(vaultId, player1.getUniqueId())) {
+            if (plugin.data.isPlayerExist(vaultId, player1.getUniqueId())) {
                 player.sendMessage(plugin.utils.color("&cVaultID của người chơi đó không hề tồn tại! Có thể họ đã chưa bỏ đồ vào hoặc chưa có trong dữ liệu của database!"));
                 return;
             }

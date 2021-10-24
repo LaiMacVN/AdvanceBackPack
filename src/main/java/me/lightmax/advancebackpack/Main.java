@@ -6,9 +6,8 @@ import me.lightmax.advancebackpack.cooldown.CommandCooldowns;
 import me.lightmax.advancebackpack.listener.CloseInventoryEvent;
 import me.lightmax.advancebackpack.listener.MenuListener;
 import me.lightmax.advancebackpack.menus.PlayerMenuUtility;
-import me.lightmax.advancebackpack.storage.MySQLGetterSetter;
+import me.lightmax.advancebackpack.storage.MySQLUtils;
 import me.lightmax.advancebackpack.storage.MySQLSetUp;
-import me.lightmax.advancebackpack.storage.YamlStorage;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.permission.Permission;
@@ -30,13 +29,12 @@ public final class Main extends JavaPlugin {
     public Utils utils;
 
     public MySQLSetUp sql;
-    public MySQLGetterSetter data;
+    public MySQLUtils data;
     public HashMap<UUID, PlayerMenuUtility> playerMenuUtilityHashMap = new HashMap<>();
     public Economy eco;
     public Permission perms;
     public ClickCooldown Clickcooldown;
     public CommandCooldowns commandCooldowns;
-    public YamlStorage yamlStorage;
 
     public Boolean isEnableMySQl = this.getConfig().getBoolean("mysql.enable");
     public Boolean isEnableYAMLStorage = this.getConfig().getBoolean("EnableYAMLStorage");
@@ -55,12 +53,10 @@ public final class Main extends JavaPlugin {
         this.saveDefaultConfig();
         this.utils = new Utils(this);
         this.sql = new MySQLSetUp(this);
-        this.data = new MySQLGetterSetter(this);
+        this.data = new MySQLUtils(this);
         this.Clickcooldown = new ClickCooldown();
         this.commandCooldowns = new CommandCooldowns();
-        this.yamlStorage = new YamlStorage(this);
 
-        this.yamlStorage.createStorage("message.yml", null);
 
         if (!this.isEnableMySQl && !this.isEnableYAMLStorage) {
             logger.info("TẮT PLUGIN BỞI VÌ LƯU TRỮ BẰNG MYSQL VÀ YAML ĐỀU BỊ TẮT! Vào config và chỉnh lại! ");
@@ -103,7 +99,7 @@ public final class Main extends JavaPlugin {
         }
 
         if (this.isEnableYAMLStorage) {
-            this.yamlStorage.createStorage("data", null);
+            //owo
         }
     }
 
